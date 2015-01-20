@@ -1,4 +1,5 @@
-# WMS `GetCapabilities` parser
+# WMS `GetCapabilities` parser 
+[![npm version](https://badge.fury.io/js/wms-capabilities.svg)](http://badge.fury.io/js/wms-capabilities)
 
 Parses [WMS](http://en.wikipedia.org/wiki/Web_Map_Service) capabilities XML format to JSON. This is a simplified excerpt from [OpenLayers](https://github.com/openlayers/ol3) code to be used separately from its large codebase.
 
@@ -8,7 +9,7 @@ Parses [WMS](http://en.wikipedia.org/wiki/Web_Map_Service) capabilities XML form
 
 ### Browserify
 ```
-npm install wms-capabilities --save-dev
+npm install wms-capabilities --save
 ```
 ```js
 var WMSCapabilities = require('wms-capabilities');
@@ -17,7 +18,7 @@ new WMSCapabilities().parse(xmlString);
 //or
 new WMSCapabilities(xmlString).toJSON();
 ```
-or
+### Browser
 ```html
 <script src="path/to/wms-capabilities.min.js"></script>
 ...
