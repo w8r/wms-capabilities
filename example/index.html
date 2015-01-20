@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Leaflet.Control.LineStringSelect</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script type="text/javascript" src="js/prism.js"></script>
+        <link rel="stylesheet" href="css/topcoat-desktop-dark.css" />
+        <link rel="stylesheet" href="css/prism.css" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <div class="container max-width">
+          <div class="wrapper">
+            <h2>WMS Service GetCapabilities Reader</h2>
+            <a class="github-button" href="https://github.com/w8r/L.Control.LineStringSelect" data-count-href="/w8r/L.Control.LineStringSelect/stargazers" data-count-api="/repos/w8r/L.Control.LineStringSelect#stargazers_count">Star</a>
+            <a class="github-button" href="https://github.com/w8r/L.Control.LineStringSelect" data-count-href="/w8r/L.Control.LineStringSelect/network" data-count-api="/repos/w8r/L.Control.LineStringSelect#forks_count">Fork</a>
+
+            <div class="">
+                <h3>Select service or copy your XML into the input</h3>
+                <select class="topcoat-select" id="service">
+                  <option value="">Select example service</option>
+                  <option value="http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs?service=wms&amp;version=1.1.1&amp;request=GetCapabilities">Near Real-Time Observations</option>
+                  <option value="http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/wwa?service=wms&amp;version=1.1.1&amp;request=GetCapabilities">Watches, Warnings and Advisories</option>
+                  <option value="http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/analyses?service=wms&amp;version=1.1.1&amp;request=GetCapabilities">Gridded Weather &amp; Oceanographic Surface Analyses</option>
+                  <option value="http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/forecasts?service=wms&amp;version=1.1.1&amp;request=GetCapabilities">On-Map Gridded Surface Forecasts</option>
+                </select>
+            </div>
+
+            <div class="outputs">
+              <div class="output">
+                <h3>XML</h3>
+                <pre class="topcoat-textarea code language-markup" id="xml" disabled></pre>
+                <textarea class="topcoat-textarea code" id="input-area" rows="10" cols="36" placeholder="Paste the GetCapabilities XML output here"></textarea>
+              </div>
+
+              <div class="output">
+                <h3>JSON</h3>
+                <pre class="topcoat-textarea code language-javascript" id="json" rows="10" cols="36" disabled></pre>
+              </div>
+            </div>
+
+            <ul>
+              <li>Code is an exerpt from <a href="http://openlayers.org" target="_blank">OpenLayers 3</a></li>
+              <li>Public WMS Services from <a href="http://nowcoast.noaa.gov/help/mapservices.shtml" target="_blank">nowcoast.noaa.gov</a></li>
+            </ul>
+
+          </div>
+        <div>
+        <script type="text/javascript" src="js/bundle.js"></script>
+        <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+    </body>
+</html>

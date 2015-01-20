@@ -1,0 +1,169 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: #F0F1F1;
+  background: #4A4D4E;
+}
+.topcoat-select {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+.topcoat-select {
+  vertical-align: top;
+  outline: none;
+}
+.topcoat-select {
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.topcoat-select {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-clip: padding-box;
+}
+.topcoat-select {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.topcoat-select:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.topcoat-select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+.topcoat-select::-ms-expand {
+  display: none;
+}
+/* topdoc
+  name: Topcoat Select
+  description: A component that lets you select things
+  modifiers:
+    :disabled: Disabled state
+    :focus: Focused
+    :invalid: Hover state
+  markup:
+    <select class="topcoat-select">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+    <select class="topcoat-select" disabled>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+  tags:
+    - desktop
+    - mobile
+    - text
+    - input
+*/
+.topcoat-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  appearance: button;
+  text-indent: 0.01px;
+  text-overflow: '';
+  padding: 0.7rem 1.3rem 0.7rem 1rem;
+  font-size: 16px;
+  font-weight: 400;
+  height: 3rem;
+  letter-spacing: 1px;
+  color: #c6c8c8;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.69);
+  border-radius: 6px;
+  background-color: #585a5a;
+  box-shadow: inset 0 1px #737373;
+  border: 1px solid #323434;
+  background-image: url('../img/dropdown.svg');
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+.topcoat-select:hover {
+  background-color: #616465;
+}
+.topcoat-select:active {
+  background-color: #3e4041;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05);
+}
+.topcoat-select:focus {
+  border: 1px solid #0037ff;
+  box-shadow: 0 0 0 2px #6fb4f1;
+  outline: 0;
+}
+h2,
+h3 {
+  font-weight: 300;
+}
+.container {
+  margin: 0 auto;
+}
+.container a {
+  color: #288edf;
+  text-decoration: none;
+}
+.container a:hover {
+  text-decoration: underline;
+}
+.container header {
+  position: relative;
+}
+.container header:before {
+  content: '';
+  width: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 23px;
+}
+.container .wrapper {
+  padding: 30px;
+}
+.container .github-button {
+  color: transparent;
+}
+.container .code {
+  max-height: 350px;
+  margin-right: 20px;
+}
+.container #input-area {
+  display: none;
+}
+.container .outputs {
+  clear: both;
+  padding-bottom: 40px;
+}
+.container .output {
+  width: 49%;
+  display: inline-block;
+  min-width: 600px;
+}
+@media (min-width: 900px) {
+  #map {
+    width: 60%;
+    height: 100%;
+  }
+  #controls {
+    width: 40%;
+  }
+  #controls .control.range {
+    display: inline-block;
+  }
+}

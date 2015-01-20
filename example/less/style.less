@@ -1,0 +1,81 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	color: #F0F1F1;
+	background: #4A4D4E;
+}
+
+@import "example/less/topcoat-select.less";
+
+h2, h3 {
+  font-weight: 300;
+}
+
+.container {
+	//max-width: 700px;
+	margin: 0 auto;
+
+	a {
+		color: #288edf;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	header {
+		position: relative;
+
+		&:before {
+			content: '';
+			width: 100%;
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 23px;
+		}
+	}
+
+	.wrapper {
+		padding: 30px;
+	}
+
+	.github-button { color: transparent; }
+
+	.code {
+		max-height: 350px;
+		margin-right: 20px;
+	}
+
+	#input-area {
+		display: none;
+	}
+
+	.outputs {
+		clear: both;
+		padding-bottom: 40px;
+	}
+
+	.output {
+		width: 49%;
+		display: inline-block;
+		min-width: 600px;
+	}
+
+}
+
+@media (min-width:900px) {
+  #map {
+	width: 60%;
+	height: 100%;
+  }
+
+  #controls {
+	width: 40%;
+  }
+
+  #controls .control.range {
+	display: inline-block;
+  }
+}
