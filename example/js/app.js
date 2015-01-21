@@ -1,6 +1,6 @@
 var jsonFormat = global.jsonFormat = require('./json-format');
 var xmlFormat = global.xmlFormat = require('./xml-format');
-var WMSCapabilities = global.WMSCapabilities = require('../../index');
+var WMSCapabilities = global.WMSCapabilities || require('../../index');
 var Spinner = require('spin.js');
 var reqwest = require('reqwest');
 
