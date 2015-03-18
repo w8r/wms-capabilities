@@ -14,7 +14,7 @@ var json = document.getElementById('json');
 var input = document.getElementById('input-area');
 
 // the only open CORS proxy I could find
-var proxy = 'http://jsonp.nodejitsu.com/?url=';
+var proxy = 'http://jsonp.afeld.me/?url=';
 var parser = new WMSCapabilities();
 
 function showInput() {
