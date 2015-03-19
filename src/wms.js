@@ -120,7 +120,7 @@ WMS._readBoundingBox = function(node, objectStack) {
   ];
 
   return {
-    'crs': node.getAttribute('CRS'),
+    'crs': node.getAttribute('CRS') || node.getAttribute('SRS'),
     'extent': extent,
     'res': resolutions
   };

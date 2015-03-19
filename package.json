@@ -1,6 +1,6 @@
 {
   "name": "wms-capabilities",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "WMS service Capabilities > JSON, based on openlayers ",
   "main": "index.js",
   "scripts": {
