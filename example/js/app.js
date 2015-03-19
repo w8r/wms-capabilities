@@ -2,8 +2,7 @@ var jsonFormat = global.jsonFormat = require('./json-format');
 var xmlFormat = global.xmlFormat = require('./xml-format');
 var WMSCapabilities = global.WMSCapabilities || require('../../index');
 var Spinner = require('spin.js');
-var reqwest = require('reqwest');
-
+var reqwest = global.reqwest = require('reqwest');
 
 ////////////////////////////////////////////////////////////////////////////////
 var serviceSelect = document.getElementById('service');
@@ -12,16 +11,16 @@ var json = document.getElementById('json');
 var input = document.getElementById('input-area');
 
 // the only open CORS proxy I could find
-var proxy = 'http://jsonp.nodejitsu.com/?url=';
+var proxy = "https://query.yahooapis.com/v1/public/yql";
 var parser = new WMSCapabilities();
 
 function showInput() {
   xml.style.display = 'none';
-  input.style.display = 'block';
+  input.style.display = 'inline-block';
 }
 
 function hideInput() {
-  xml.style.display = 'block';
+  xml.style.display = 'inline-block';
   input.style.display = 'none';
 }
 
@@ -36,10 +35,17 @@ function update(xmlString) {
 serviceSelect.addEventListener('change', function() {
   if (serviceSelect.value !== '') {
     hideInput();
+
     reqwest({
-      url: proxy + encodeURIComponent(serviceSelect.value),
-      error: function(req) {
-        update(JSON.parse(req.responseText).error);
+      url: proxy,
+      data: {
+        q: 'select * from xml where url="' +
+          serviceSelect.value.replace(/\&amp\;/g, '&') + '"'
+      },
+      type: "xml",
+      crossOrigin: true,
+      success: function(xml) {
+        update(xml.firstChild.firstChild.innerHTML);
       }
     });
   }
@@ -50,5 +56,6 @@ xml.addEventListener('click', showInput, false);
 input.addEventListener('paste', function() {
   setTimeout(function() {
     update(input.value);
+    hideInput();
   }, 50);
 }, false);
