@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.WMSCapabilities=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.WMSCapabilities = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
 module.exports = require('./src/wms');
@@ -943,8 +943,7 @@ XMLParser.getAllTextContent_ = function(node, normalizeWhitespace, accumulator) 
  * @param {*=} bind The object to use as `this`.
  */
 XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
-  var n;
-  for (n = node.firstElementChild; n; n = n.nextElementSibling) {
+  for (var n = XMLParser.firstElementChild(node); n; n = XMLParser.nextElementSibling(n)) {
     var parsers = parsersNS[n.namespaceURI];
     if (isDef(parsers)) {
       var parser = parsers[n.localName];
@@ -953,6 +952,32 @@ XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
       }
     }
   }
+};
+
+/**
+ * Mostly for node.js
+ * @param  {Node} node
+ * @return {Node}
+ */
+XMLParser.firstElementChild = function(node) {
+  var firstElementChild = node.firstElementChild || node.firstChild;
+  while (firstElementChild.nodeType !== nodeTypes.ELEMENT) {
+    firstElementChild = firstElementChild.nextSibling;
+  }
+  return firstElementChild;
+};
+
+/**
+ * Mostly for node.js
+ * @param  {Node} node
+ * @return {Node}
+ */
+XMLParser.nextElementSibling = function(node) {
+  var nextElementSibling = node.nextElementSibling || node.nextSibling;
+  while (nextElementSibling && nextElementSibling.nodeType !== nodeTypes.ELEMENT) {
+    nextElementSibling = nextElementSibling.nextSibling;
+  }
+  return nextElementSibling;
 };
 
 /**

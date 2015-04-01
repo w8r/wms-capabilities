@@ -71,8 +71,7 @@ XMLParser.getAllTextContent_ = function(node, normalizeWhitespace, accumulator) 
  * @param {*=} bind The object to use as `this`.
  */
 XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
-  var n;
-  for (n = node.firstElementChild; n; n = n.nextElementSibling) {
+  for (var n = XMLParser.firstElementChild(node); n; n = XMLParser.nextElementSibling(n)) {
     var parsers = parsersNS[n.namespaceURI];
     if (isDef(parsers)) {
       var parser = parsers[n.localName];
@@ -81,6 +80,32 @@ XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
       }
     }
   }
+};
+
+/**
+ * Mostly for node.js
+ * @param  {Node} node
+ * @return {Node}
+ */
+XMLParser.firstElementChild = function(node) {
+  var firstElementChild = node.firstElementChild || node.firstChild;
+  while (firstElementChild.nodeType !== nodeTypes.ELEMENT) {
+    firstElementChild = firstElementChild.nextSibling;
+  }
+  return firstElementChild;
+};
+
+/**
+ * Mostly for node.js
+ * @param  {Node} node
+ * @return {Node}
+ */
+XMLParser.nextElementSibling = function(node) {
+  var nextElementSibling = node.nextElementSibling || node.nextSibling;
+  while (nextElementSibling && nextElementSibling.nodeType !== nodeTypes.ELEMENT) {
+    nextElementSibling = nextElementSibling.nextSibling;
+  }
+  return nextElementSibling;
 };
 
 /**
