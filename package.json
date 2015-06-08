@@ -4,7 +4,7 @@
   "description": "WMS service Capabilities > JSON, based on openlayers ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 1",
+    "test": "tape test/index.js | tap-spec",
     "start": "npm run watch-js & npm run watch-css & serve -p 3001",
     "watch-css": "catw -c 'lessc -' 'example/less/*.less' -o example/css/style.css -v",
     "watch-js": "watchify -v -d example/js/app.js -u leaflet -o example/js/bundle.js",
@@ -25,7 +25,11 @@
     "reqwest": "^1.1.5",
     "serve": "^1.4.0",
     "spin.js": "^2.0.2",
-    "watchify": "^2.2.1"
+    "tap-spec": "^4.0.0",
+    "tape": "^4.0.0",
+    "testling": "^1.7.1",
+    "watchify": "^2.2.1",
+    "xmldom": "^0.1.19"
   },
   "keywords": [
     "gis",
