@@ -944,7 +944,8 @@ XMLParser.getAllTextContent_ = function(node, normalizeWhitespace, accumulator) 
  */
 XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
   for (var n = XMLParser.firstElementChild(node); n; n = XMLParser.nextElementSibling(n)) {
-    var parsers = parsersNS[n.namespaceURI];
+    var namespaceURI = n.namespaceURI || null;
+    var parsers = parsersNS[namespaceURI];
     if (isDef(parsers)) {
       var parser = parsers[n.localName];
       if (isDef(parser)) {
