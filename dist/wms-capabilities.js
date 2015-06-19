@@ -962,7 +962,7 @@ XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
  */
 XMLParser.firstElementChild = function(node) {
   var firstElementChild = node.firstElementChild || node.firstChild;
-  while (firstElementChild.nodeType !== nodeTypes.ELEMENT) {
+  while (firstElementChild && firstElementChild.nodeType !== nodeTypes.ELEMENT) {
     firstElementChild = firstElementChild.nextSibling;
   }
   return firstElementChild;
