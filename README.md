@@ -38,3 +38,12 @@ var WMSCapabilities = require('wms-capabilities');
 ...
 new WMSCapabilities(xmlString).toJSON();
 ```
+
+### Command-line
+
+```sh
+$ npm install -g wms-capabilities
+$ cat capabilities.xml | wmscapabilities > out.json
+$ # or
+$ wmscapabilities capabilities.json > out.json
+```
