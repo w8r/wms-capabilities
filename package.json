@@ -3,6 +3,9 @@
   "version": "0.2.2",
   "description": "WMS service Capabilities > JSON, based on openlayers ",
   "main": "index.js",
+  "bin": {
+    "wmscapabilities": "bin/wmscapabilities"
+  },
   "scripts": {
     "test": "tape test/index.js | tap-spec",
     "start": "npm run watch-js & npm run watch-css & serve -p 3001",
@@ -28,7 +31,10 @@
     "tap-spec": "^4.0.0",
     "tape": "^4.0.0",
     "testling": "^1.7.1",
-    "watchify": "^2.2.1",
+    "watchify": "^2.2.1"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0",
     "xmldom": "^0.1.19"
   },
   "keywords": [
