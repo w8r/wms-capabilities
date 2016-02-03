@@ -214,17 +214,28 @@ WMS._readAttribution = function(node, objectStack) {
 /**
  * @private
  * @param {Node} node Node.
+ * @return {ol.Extent} Bounding box object.
+ */
+WMS._readBoundingBoxExtent = function(node) {
+	var readDecimalString = XSD.readDecimalString;
+
+	return [
+	  readDecimalString(node.getAttribute('minx')),
+	  readDecimalString(node.getAttribute('miny')),
+	  readDecimalString(node.getAttribute('maxx')),
+	  readDecimalString(node.getAttribute('maxy'))
+	];
+}
+
+/**
+ * @private
+ * @param {Node} node Node.
  * @param {Array.<*>} objectStack Object stack.
  * @return {Object} Bounding box object.
  */
 WMS._readBoundingBox = function(node, objectStack) {
+  var extent = WMS._readBoundingBoxExtent(node);
   var readDecimalString = XSD.readDecimalString;
-  var extent = [
-    readDecimalString(node.getAttribute('minx')),
-    readDecimalString(node.getAttribute('miny')),
-    readDecimalString(node.getAttribute('maxx')),
-    readDecimalString(node.getAttribute('maxy'))
-  ];
 
   var resolutions = [
     readDecimalString(node.getAttribute('resx')),
@@ -236,6 +247,23 @@ WMS._readBoundingBox = function(node, objectStack) {
     'extent': extent,
     'res': resolutions
   };
+};
+
+/**
+ * @private
+ * @param {Node} node Node.
+ * @param {Array.<*>} objectStack Object stack.
+ * @return {ol.Extent|undefined} Bounding box object.
+ */
+WMS._readLatLonBoundingBox = function(node, objectStack) {
+  var extent = WMS._readBoundingBoxExtent(node);
+
+  if (!isDef(extent[0]) || !isDef(extent[1]) ||
+    !isDef(extent[2]) || !isDef(extent[3])) {
+    return undefined;
+  }
+
+  return extent;
 };
 
 
@@ -707,7 +735,9 @@ WMS.LAYER_PARSERS = XMLParser.makeParsersNS(
     'Abstract': makePropertySetter(XSD.readString),
     'KeywordList': makePropertySetter(WMS._readKeywordList),
     'CRS': XMLParser.makeObjectPropertyPusher(XSD.readString),
+	  'SRS': XMLParser.makeObjectPropertyPusher(XSD.readString),
     'EX_GeographicBoundingBox': makePropertySetter(WMS._readEXGeographicBoundingBox),
+	  'LatLonBoundingBox': makePropertySetter(WMS._readLatLonBoundingBox),
     'BoundingBox': XMLParser.makeObjectPropertyPusher(WMS._readBoundingBox),
     'Dimension': XMLParser.makeObjectPropertyPusher(WMS._readDimension),
     'Attribution': makePropertySetter(WMS._readAttribution),
