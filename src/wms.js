@@ -595,6 +595,7 @@ WMS.LAYER_PARSERS = XMLParser.makeParsersNS(
     'Abstract': makePropertySetter(XSD.readString),
     'KeywordList': makePropertySetter(WMS._readKeywordList),
     'CRS': XMLParser.makeObjectPropertyPusher(XSD.readString),
+	'SRS': XMLParser.makeObjectPropertyPusher(XSD.readString),
     'EX_GeographicBoundingBox': makePropertySetter(WMS._readEXGeographicBoundingBox),
     'BoundingBox': XMLParser.makeObjectPropertyPusher(WMS._readBoundingBox),
     'Dimension': XMLParser.makeObjectPropertyPusher(WMS._readDimension),
