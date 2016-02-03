@@ -106,7 +106,7 @@ WMS._readAttribution = function(node, objectStack) {
  */
 WMS._readBoundingBoxExtent = function(node) {
 	var readDecimalString = XSD.readDecimalString;
-	
+
 	return [
 	  readDecimalString(node.getAttribute('minx')),
 	  readDecimalString(node.getAttribute('miny')),
@@ -124,7 +124,7 @@ WMS._readBoundingBoxExtent = function(node) {
 WMS._readBoundingBox = function(node, objectStack) {
   var extent = WMS._readBoundingBoxExtent(node);
   var readDecimalString = XSD.readDecimalString;
-  
+
   var resolutions = [
     readDecimalString(node.getAttribute('resx')),
     readDecimalString(node.getAttribute('resy'))
@@ -145,7 +145,7 @@ WMS._readBoundingBox = function(node, objectStack) {
  */
 WMS._readLatLonBoundingBox = function(node, objectStack) {
   var extent = WMS._readBoundingBoxExtent(node);
-  
+
   if (!isDef(extent[0]) || !isDef(extent[1]) ||
     !isDef(extent[2]) || !isDef(extent[3])) {
     return undefined;
@@ -623,9 +623,9 @@ WMS.LAYER_PARSERS = XMLParser.makeParsersNS(
     'Abstract': makePropertySetter(XSD.readString),
     'KeywordList': makePropertySetter(WMS._readKeywordList),
     'CRS': XMLParser.makeObjectPropertyPusher(XSD.readString),
-	'SRS': XMLParser.makeObjectPropertyPusher(XSD.readString),
+	  'SRS': XMLParser.makeObjectPropertyPusher(XSD.readString),
     'EX_GeographicBoundingBox': makePropertySetter(WMS._readEXGeographicBoundingBox),
-	'LatLonBoundingBox': makePropertySetter(WMS._readLatLonBoundingBox),
+	  'LatLonBoundingBox': makePropertySetter(WMS._readLatLonBoundingBox),
     'BoundingBox': XMLParser.makeObjectPropertyPusher(WMS._readBoundingBox),
     'Dimension': XMLParser.makeObjectPropertyPusher(WMS._readDimension),
     'Attribution': makePropertySetter(WMS._readAttribution),
