@@ -156,6 +156,23 @@ WMS._readLatLonBoundingBox = function(node, objectStack) {
 
 
 /**
+ * @privat
+ * @param  {Node} node  Node
+ * @param  {Arra.<Object>} objectStack Object stack
+ * @return {Object}
+ */
+WMS._readScaleHint = function(node, objectStack) {
+  var min = parseFloat(node.getAttribute('min'));
+  var max = parseFloat(node.getAttribute('max'));
+
+  return {
+    min: min,
+    max: max
+  };
+};
+
+
+/**
  * @private
  * @param {Node} node Node.
  * @param {Array.<*>} objectStack Object stack.
@@ -637,6 +654,7 @@ WMS.LAYER_PARSERS = XMLParser.makeParsersNS(
     'Style': XMLParser.makeObjectPropertyPusher(WMS._readStyle),
     'MinScaleDenominator': makePropertySetter(XSD.readDecimal),
     'MaxScaleDenominator': makePropertySetter(XSD.readDecimal),
+    'ScaleHint': makePropertySetter(WMS._readScaleHint),
     'Layer': XMLParser.makeObjectPropertyPusher(WMS._readLayer)
   });
 

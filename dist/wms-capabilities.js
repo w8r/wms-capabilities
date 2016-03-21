@@ -1,9 +1,9 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.WMSCapabilities=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.WMSCapabilities = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
-module.exports = _dereq_('./src/wms');
+module.exports = require('./src/wms');
 
-},{"./src/wms":6}],2:[function(_dereq_,module,exports){
+},{"./src/wms":6}],2:[function(require,module,exports){
 "use strict";
 
 /**
@@ -24,7 +24,7 @@ module.exports = {
   NOTATION: 12
 };
 
-},{}],3:[function(_dereq_,module,exports){
+},{}],3:[function(require,module,exports){
 "use strict";
 
 /**
@@ -37,7 +37,7 @@ module.exports = function isDef(val) {
   return val !== void 0;
 };
 
-},{}],4:[function(_dereq_,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 /**
@@ -53,10 +53,10 @@ module.exports = function(obj, key, value) {
   return key in obj ? obj[key] : (obj[key] = value);
 };
 
-},{}],5:[function(_dereq_,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
-var isDef = _dereq_('./isdef');
+var isDef = require('./isdef');
 
 /**
  * Make sure we trim BOM and NBSP
@@ -109,15 +109,15 @@ module.exports = {
 
 };
 
-},{"./isdef":3}],6:[function(_dereq_,module,exports){
+},{"./isdef":3}],6:[function(require,module,exports){
 "use strict";
 
-var XMLParser = _dereq_('./xml_parser');
-var isDef = _dereq_('./utils/isdef');
-var nodeTypes = _dereq_('./node_types');
-var setIfUndefined = _dereq_('./utils/setifundefined');
-var XSD = _dereq_('./xsd');
-var XLink = _dereq_('./xlink');
+var XMLParser = require('./xml_parser');
+var isDef = require('./utils/isdef');
+var nodeTypes = require('./node_types');
+var setIfUndefined = require('./utils/setifundefined');
+var XSD = require('./xsd');
+var XLink = require('./xlink');
 
 /**
  * WMS Capabilities parser
@@ -264,6 +264,23 @@ WMS._readLatLonBoundingBox = function(node, objectStack) {
   }
 
   return extent;
+};
+
+
+/**
+ * @privat
+ * @param  {Node} node  Node
+ * @param  {Arra.<Object>} objectStack Object stack
+ * @return {Object}
+ */
+WMS._readScaleHint = function(node, objectStack) {
+  var min = parseFloat(node.getAttribute('min'));
+  var max = parseFloat(node.getAttribute('max'));
+
+  return {
+    min: min,
+    max: max
+  };
 };
 
 
@@ -749,6 +766,7 @@ WMS.LAYER_PARSERS = XMLParser.makeParsersNS(
     'Style': XMLParser.makeObjectPropertyPusher(WMS._readStyle),
     'MinScaleDenominator': makePropertySetter(XSD.readDecimal),
     'MaxScaleDenominator': makePropertySetter(XSD.readDecimal),
+    'ScaleHint': makePropertySetter(WMS._readScaleHint),
     'Layer': XMLParser.makeObjectPropertyPusher(WMS._readLayer)
   });
 
@@ -879,7 +897,7 @@ WMS.KEYWORDLIST_PARSERS = XMLParser.makeParsersNS(
 
 module.exports = WMS;
 
-},{"./node_types":2,"./utils/isdef":3,"./utils/setifundefined":4,"./xlink":7,"./xml_parser":8,"./xsd":9}],7:[function(_dereq_,module,exports){
+},{"./node_types":2,"./utils/isdef":3,"./utils/setifundefined":4,"./xlink":7,"./xml_parser":8,"./xsd":9}],7:[function(require,module,exports){
 "use strict";
 
 /**
@@ -899,12 +917,12 @@ module.exports = {
   }
 };
 
-},{}],8:[function(_dereq_,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
-var isDef = _dereq_('./utils/isdef');
-var setIfUndefined = _dereq_('./utils/setifundefined');
-var nodeTypes = _dereq_('./node_types');
+var isDef = require('./utils/isdef');
+var setIfUndefined = require('./utils/setifundefined');
+var nodeTypes = require('./node_types');
 
 /**
  * XML DOM parser
@@ -1133,12 +1151,12 @@ XMLParser.pushParseAndPop = function(object, parsersNS, node, objectStack, bind)
 
 module.exports = XMLParser;
 
-},{"./node_types":2,"./utils/isdef":3,"./utils/setifundefined":4}],9:[function(_dereq_,module,exports){
+},{"./node_types":2,"./utils/isdef":3,"./utils/setifundefined":4}],9:[function(require,module,exports){
 "use strict";
 
-var isDef = _dereq_('./utils/isdef');
-var string = _dereq_('./utils/string');
-var XMLParser = _dereq_('./xml_parser');
+var isDef = require('./utils/isdef');
+var string = require('./utils/string');
+var XMLParser = require('./xml_parser');
 
 var XSD = {};
 
@@ -1315,6 +1333,5 @@ XSD.writeStringTextNode = function(node, string) {
 
 module.exports = XSD;
 
-},{"./utils/isdef":3,"./utils/string":5,"./xml_parser":8}]},{},[1])
-(1)
+},{"./utils/isdef":3,"./utils/string":5,"./xml_parser":8}]},{},[1])(1)
 });

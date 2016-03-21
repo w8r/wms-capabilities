@@ -2,7 +2,7 @@
 
 var xmldom = require('xmldom');
 var DOMParser = global.DOMParser = xmldom.DOMParser;
-var WMSCapabilites = require('../');
+var WMSCapabilites = require('../dist/wms-capabilities.min.js');
 var fs = require('fs');
 var path = require('path');
 
