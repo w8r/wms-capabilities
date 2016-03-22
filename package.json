@@ -45,7 +45,7 @@
     "json"
   ],
   "author": "Alexander Milevski <info@w8r.name>",
-  "license": "MIT",
+  "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/w8r/wms-capabilities/issues"
   },
