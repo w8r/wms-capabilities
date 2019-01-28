@@ -17,7 +17,7 @@ var p = [],
     return new Array(count + 1).join('\t');
   };
 
-module.exports = function(json) {
+export default function(json) {
   p = [];
   var out = "",
     indent = 0;

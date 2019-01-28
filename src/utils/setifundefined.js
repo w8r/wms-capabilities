@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Adds a key-value pair to the object/map/hash if it doesn't exist yet.
  *
@@ -9,6 +7,4 @@
  * @return {V} The value of the entry at the end of the function.
  * @template K,V
  */
-module.exports = function(obj, key, value) {
-  return key in obj ? obj[key] : (obj[key] = value);
-};
+export default (obj, key, value) => key in obj ? obj[key] : (obj[key] = value);

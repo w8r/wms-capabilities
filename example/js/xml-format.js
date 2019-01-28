@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(xml) {
+export default function(xml) {
   var formatted = '';
   var reg = /(>)(<)(\/*)/g;
   xml = xml.replace(reg, '$1\r\n$2$3');
@@ -30,4 +30,4 @@ module.exports = function(xml) {
   });
 
   return formatted;
-};
+}

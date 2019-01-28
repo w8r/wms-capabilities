@@ -1,10 +1,12 @@
 "use strict";
 
-var tape = require('tape');
-var WMSCapabilities = require('../index');
-var fs = require('fs');
-var path = require('path');
-var DOMParser = global.DOMParser = require('xmldom').DOMParser;
+import tape from 'tape';
+import WMSCapabilities from '../dist/wms-capabilities';
+import fs from 'fs';
+import path from 'path';
+
+
+import { DOMParser } from 'xmldom';
 
 tape('WMSCapabilities', function(t) {
 
@@ -13,7 +15,7 @@ tape('WMSCapabilities', function(t) {
     var xml = fs.readFileSync(url, {
       encoding: 'utf-8'
     });
-    var json = new WMSCapabilities().parse(xml);
+    var json = new WMSCapabilities(undefined, DOMParser).parse(xml);
 
     t.ok(json, 'got result');
     t.equal(typeof json, 'object', 'parsed');
@@ -27,7 +29,7 @@ tape('WMSCapabilities', function(t) {
     var xml = fs.readFileSync(url, {
       encoding: 'utf-8'
     });
-    var json = new WMSCapabilities(xml).toJSON();
+    var json = new WMSCapabilities(xml, DOMParser).toJSON();
 
     t.ok(json, 'got result');
     t.equal(typeof json, 'object', 'parsed');
@@ -40,7 +42,7 @@ tape('WMSCapabilities', function(t) {
     var xml = fs.readFileSync(url, {
       encoding: 'utf-8'
     });
-    var json = new WMSCapabilities(xml).toJSON();
+    var json = new WMSCapabilities(xml, DOMParser).toJSON();
 
     t.ok(json, 'got result');
     t.equal(typeof json, 'object', 'parsed');
@@ -54,7 +56,7 @@ tape('WMSCapabilities', function(t) {
     var xml = fs.readFileSync(url, {
       encoding: 'utf-8'
     });
-    var json = new WMSCapabilities(xml).toJSON();
+    var json = new WMSCapabilities(xml, DOMParser).toJSON();
 
     t.ok(json, 'got result');
     t.equal(typeof json, 'object', 'parsed');
@@ -68,7 +70,7 @@ tape('WMSCapabilities', function(t) {
     var xml = fs.readFileSync(url, {
       encoding: 'utf-8'
     });
-    var json = new WMSCapabilities(xml).toJSON();
+    var json = new WMSCapabilities(xml, DOMParser).toJSON();
 
     t.ok(json, 'got result');
     t.equal(typeof json, 'object', 'parsed');

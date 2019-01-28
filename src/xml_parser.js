@@ -1,40 +1,53 @@
-"use strict";
+import isDef from './utils/isdef';
+import setIfUndefined from'./utils/setifundefined';
+import nodeTypes from './node_types';
 
-var isDef = require('./utils/isdef');
-var setIfUndefined = require('./utils/setifundefined');
-var nodeTypes = require('./node_types');
-
-/**
- * XML DOM parser
- * @constructor
- */
-function XMLParser() {
+export default class XMLParser {
+  /**
+   * XML DOM parser
+   * @constructor
+   * @param {DOMParser} DOMParser
+   */
+  constructor (DOMParser) {
+    /**
+     * @type {DOMParser}
+     */
+    this._parser = new DOMParser();
+  };
 
   /**
-   * @type {DOMParser}
+   * @param  {String} xmlstring
+   * @return {Document}
    */
-  this._parser = new DOMParser();
-};
+  toDocument (xmlstring) {
+    return this._parser.parseFromString(xmlstring, 'application/xml');
+  }
+
+  /**
+   * Recursively grab all text content of child nodes into a single string.
+   * @param {Node} node Node.
+   * @param {boolean} normalizeWhitespace Normalize whitespace: remove all line
+   * breaks.
+   * @return {string} All text content.
+   * @api
+   */
+  getAllTextContent (node, normalizeWhitespace) {
+    return getAllTextContent(node, normalizeWhitespace, []).join('');
+  }
+}
+
 
 /**
- * @param  {String} xmlstring
- * @return {Document}
- */
-XMLParser.prototype.toDocument = function(xmlstring) {
-  return this._parser.parseFromString(xmlstring, 'application/xml');
-};
-
-/**
- * Recursively grab all text content of child nodes into a single string.
- * @param {Node} node Node.
- * @param {boolean} normalizeWhitespace Normalize whitespace: remove all line
- * breaks.
- * @return {string} All text content.
- * @api
- */
-XMLParser.getAllTextContent = function(node, normalizeWhitespace) {
-  return XMLParser.getAllTextContent_(node, normalizeWhitespace, []).join('');
-};
+* Recursively grab all text content of child nodes into a single string.
+* @param {Node} node Node.
+* @param {boolean} normalizeWhitespace Normalize whitespace: remove all line
+* breaks.
+* @return {string} All text content.
+* @api
+*/
+export function getAllTextContent (node, normalizeWhitespace) {
+ return getAllTextContentInternal(node, normalizeWhitespace, []).join('');
+}
 
 
 /**
@@ -45,7 +58,7 @@ XMLParser.getAllTextContent = function(node, normalizeWhitespace) {
  * @private
  * @return {Array.<String|string>} Accumulator.
  */
-XMLParser.getAllTextContent_ = function(node, normalizeWhitespace, accumulator) {
+export function getAllTextContentInternal (node, normalizeWhitespace, accumulator) {
   if (node.nodeType === nodeTypes.CDATA_SECTION ||
     node.nodeType === nodeTypes.TEXT) {
     if (normalizeWhitespace) {
@@ -57,11 +70,11 @@ XMLParser.getAllTextContent_ = function(node, normalizeWhitespace, accumulator) 
   } else {
     var n;
     for (n = node.firstChild; n; n = n.nextSibling) {
-      XMLParser.getAllTextContent_(n, normalizeWhitespace, accumulator);
+      getAllTextContentInternal(n, normalizeWhitespace, accumulator);
     }
   }
   return accumulator;
-};
+}
 
 /**
  * @param {Object.<string, Object.<string, XMLParser.Parser>>} parsersNS
@@ -70,8 +83,8 @@ XMLParser.getAllTextContent_ = function(node, normalizeWhitespace, accumulator) 
  * @param {Array.<*>} objectStack Object stack.
  * @param {*=} bind The object to use as `this`.
  */
-XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
-  for (var n = XMLParser.firstElementChild(node); n; n = XMLParser.nextElementSibling(n)) {
+export function parseNode (parsersNS, node, objectStack, bind) {
+  for (var n = firstElementChild(node); n; n = nextElementSibling(n)) {
     var namespaceURI = n.namespaceURI || null;
     var parsers = parsersNS[namespaceURI];
     if (isDef(parsers)) {
@@ -81,33 +94,33 @@ XMLParser.parseNode = function(parsersNS, node, objectStack, bind) {
       }
     }
   }
-};
+}
 
 /**
  * Mostly for node.js
  * @param  {Node} node
  * @return {Node}
  */
-XMLParser.firstElementChild = function(node) {
-  var firstElementChild = node.firstElementChild || node.firstChild;
+export function firstElementChild (node) {
+  let firstElementChild = node.firstElementChild || node.firstChild;
   while (firstElementChild && firstElementChild.nodeType !== nodeTypes.ELEMENT) {
     firstElementChild = firstElementChild.nextSibling;
   }
   return firstElementChild;
-};
+}
 
 /**
  * Mostly for node.js
  * @param  {Node} node
  * @return {Node}
  */
-XMLParser.nextElementSibling = function(node) {
-  var nextElementSibling = node.nextElementSibling || node.nextSibling;
-  while (nextElementSibling && nextElementSibling.nodeType !== nodeTypes.ELEMENT) {
-    nextElementSibling = nextElementSibling.nextSibling;
+function nextElementSibling (node) {
+  let nextSibling = node.nextElementSibling || node.nextSibling;
+  while (nextSibling && nextSibling.nodeType !== nodeTypes.ELEMENT) {
+    nextSibling = nextSibling.nextSibling;
   }
-  return nextElementSibling;
-};
+  return nextSibling;
+}
 
 /**
  * @param {Array.<string>} namespaceURIs Namespace URIs.
@@ -116,10 +129,10 @@ XMLParser.nextElementSibling = function(node) {
  *     ParsersNS.
  * @return {Object.<string, Object.<string, XMLParser.Parser>>} Parsers NS.
  */
-XMLParser.makeParsersNS = function(namespaceURIs, parsers, opt_parsersNS) {
+export function makeParsersNS (namespaceURIs, parsers, opt_parsersNS) {
   return /** @type {Object.<string, Object.<string, XMLParser.Parser>>} */ (
-    XMLParser.makeStructureNS(namespaceURIs, parsers, opt_parsersNS));
-};
+    makeStructureNS(namespaceURIs, parsers, opt_parsersNS));
+}
 
 /**
  * Creates a namespaced structure, using the same values for each namespace.
@@ -131,7 +144,7 @@ XMLParser.makeParsersNS = function(namespaceURIs, parsers, opt_parsersNS) {
  * @return {Object.<string, T>} Namespaced structure.
  * @template T
  */
-XMLParser.makeStructureNS = function(namespaceURIs, structure, opt_structureNS) {
+export function makeStructureNS (namespaceURIs, structure, opt_structureNS) {
   /**
    * @type {Object.<string, *>}
    */
@@ -141,16 +154,16 @@ XMLParser.makeStructureNS = function(namespaceURIs, structure, opt_structureNS) 
     structureNS[namespaceURIs[i]] = structure;
   }
   return structureNS;
-};
+}
+
 
 /**
  * @param {function(this: T, Node, Array.<*>): *} valueReader Value reader.
- * @param {string=} opt_property Property.
  * @param {T=} opt_this The object to use as `this` in `valueReader`.
- * @return {XMLParser.Parser} Parser.
+ * @return {Function} Parser.
  * @template T
  */
-XMLParser.makeObjectPropertySetter = function(valueReader, opt_property, opt_this) {
+export function makeArrayPusher (valueReader, opt_this) {
   return (
     /**
      * @param {Node} node Node.
@@ -160,21 +173,60 @@ XMLParser.makeObjectPropertySetter = function(valueReader, opt_property, opt_thi
       var value = valueReader.call(isDef(opt_this) ? opt_this : this,
         node, objectStack);
       if (isDef(value)) {
-        var object = /** @type {Object} */ (objectStack[objectStack.length - 1]);
-        var property = isDef(opt_property) ? opt_property : node.localName;
-        object[property] = value;
+        var array = objectStack[objectStack.length - 1];
+        array.push(value);
       }
     });
-};
+}
+
+/**
+ * @param {Object}                                     object Object.
+ * @param {Object.<String, Object.<String, Function>>} parsersNS Parsers by namespace.
+ * @param {Node}                                       node Node.
+ * @param {Array.<*>}                                  objectStack Object stack.
+ * @param {*=}                                         bind The object to use as `this`.
+ * @return {Object|undefined} Object.
+ */
+export function pushParseAndPop (object, parsersNS, node, objectStack, bind) {
+  objectStack.push(object);
+  parseNode(parsersNS, node, objectStack, bind);
+  return objectStack.pop();
+}
+
 
 /**
  * @param {function(this: T, Node, Array.<*>): *} valueReader Value reader.
  * @param {string=} opt_property Property.
  * @param {T=} opt_this The object to use as `this` in `valueReader`.
- * @return {Function} Parser.
+ * @return {XMLParser.Parser} Parser.
  * @template T
  */
-XMLParser.makeObjectPropertyPusher = function(valueReader, opt_property, opt_this) {
+export function makeObjectPropertySetter (valueReader, opt_property, opt_this) {
+  return (
+    /**
+     * @param {Node} node Node.
+     * @param {Array.<*>} objectStack Object stack.
+     */
+    function(node, objectStack) {
+      let value = valueReader.call(isDef(opt_this) ? opt_this : this,
+        node, objectStack);
+      if (isDef(value)) {
+        var object = /** @type {Object} */ (objectStack[objectStack.length - 1]);
+        var property = isDef(opt_property) ? opt_property : node.localName;
+        object[property] = value;
+      }
+    });
+}
+
+
+/**
+   * @param {function(this: T, Node, Array.<*>): *} valueReader Value reader.
+   * @param {string=} opt_property Property.
+   * @param {T=} opt_this The object to use as `this` in `valueReader`.
+   * @return {Function} Parser.
+   * @template T
+   */
+export function makeObjectPropertyPusher (valueReader, opt_property, opt_this) {
   return (
     /**
      * @param {Node} node Node.
@@ -191,42 +243,4 @@ XMLParser.makeObjectPropertyPusher = function(valueReader, opt_property, opt_thi
         array.push(value);
       }
     });
-};
-
-/**
- * @param {function(this: T, Node, Array.<*>): *} valueReader Value reader.
- * @param {T=} opt_this The object to use as `this` in `valueReader`.
- * @return {Function} Parser.
- * @template T
- */
-XMLParser.makeArrayPusher = function(valueReader, opt_this) {
-  return (
-    /**
-     * @param {Node} node Node.
-     * @param {Array.<*>} objectStack Object stack.
-     */
-    function(node, objectStack) {
-      var value = valueReader.call(isDef(opt_this) ? opt_this : this,
-        node, objectStack);
-      if (isDef(value)) {
-        var array = objectStack[objectStack.length - 1];
-        array.push(value);
-      }
-    });
-};
-
-/**
- * @param {Object}                                     object Object.
- * @param {Object.<String, Object.<String, Function>>} parsersNS Parsers by namespace.
- * @param {Node}                                       node Node.
- * @param {Array.<*>}                                  objectStack Object stack.
- * @param {*=}                                         bind The object to use as `this`.
- * @return {Object|undefined} Object.
- */
-XMLParser.pushParseAndPop = function(object, parsersNS, node, objectStack, bind) {
-  objectStack.push(object);
-  XMLParser.parseNode(parsersNS, node, objectStack, bind);
-  return objectStack.pop();
-};
-
-module.exports = XMLParser;
+  }

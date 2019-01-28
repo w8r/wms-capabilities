@@ -1,8 +1,7 @@
-var jsonFormat = global.jsonFormat = require('./json-format');
-var xmlFormat = global.xmlFormat = require('./xml-format');
-var WMSCapabilities = global.WMSCapabilities || require('../../dist/wms-capabilities.min');
-var Spinner = require('spin.js');
-var reqwest = global.reqwest = require('reqwest');
+import jsonFormat from './json-format';
+import xmlFormat from './xml-format';
+import WMSCapabilities from '../../dist/wms-capabilities.min';
+//import Spinner from 'spin.js';
 
 ////////////////////////////////////////////////////////////////////////////////
 var serviceSelect = document.getElementById('service');
@@ -11,7 +10,6 @@ var json = document.getElementById('json');
 var input = document.getElementById('input-area');
 
 // the only open CORS proxy I could find
-var proxy = "https://query.yahooapis.com/v1/public/yql";
 var parser = new WMSCapabilities();
 
 function showInput() {
@@ -36,18 +34,9 @@ serviceSelect.addEventListener('change', function() {
   if (serviceSelect.value !== '') {
     hideInput();
 
-    reqwest({
-      url: proxy,
-      data: {
-        q: 'select * from xml where url="' +
-          serviceSelect.value.replace(/\&amp\;/g, '&') + '"'
-      },
-      type: "xml",
-      crossOrigin: true,
-      success: function(xml) {
-        update(xml.firstChild.firstChild.innerHTML);
-      }
-    });
+    fetch(serviceSelect.value)
+      .then(response => response.text())
+      .then(xmlString => update(xmlString));
   }
 }, false);
 

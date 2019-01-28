@@ -17,26 +17,28 @@ window.module = {
   exports: {}
 };
 
+window['WMSCapabilities'] = function () {};
+
 /**
  * @class WMSCapabilities
  * @constructor
  */
-var WMSCapabilities = function() {};
+window['WMSCapabilities'] = function() {};
 
 /**
  * @param {String} xmlString
  * @return {WMSCapabilities}
  */
-WMS.prototype.data = function(xmlString) {};
+window['WMSCapabilities'].prototype.data = function(xmlString) {};
 
 /**
  * @param  {String=} xmlString
  * @return {Object}
  */
-WMS.prototype.toJSON = function(xmlString) {};
+window['WMSCapabilities'].prototype.toJSON = function(xmlString) {};
 
 /**
  * @param {String} xmlString
  * @return {Object}
  */
-WMS.prototype.parse = function(xmlString) {};
+window['WMSCapabilities'].prototype.parse = function(xmlString) {};

@@ -1,9 +1,7 @@
-"use strict";
-
 /**
  * @enum {Number}
  */
-module.exports = {
+const NODE_TYPES = {
   ELEMENT: 1,
   ATTRIBUTE: 2,
   TEXT: 3,
@@ -17,3 +15,5 @@ module.exports = {
   DOCUMENT_FRAGMENT: 11,
   NOTATION: 12
 };
+
+export default NODE_TYPES;
