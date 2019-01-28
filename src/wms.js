@@ -284,7 +284,8 @@ WMS._readException = function(node, objectStack) {
  * @return {Object|undefined} Layer object.
  */
 WMS._readCapabilityLayer = function(node, objectStack) {
-  return XMLParser.pushParseAndPop({}, WMS.LAYER_PARSERS, node, objectStack);
+  var queryable = XSD.readBooleanString(node.getAttribute('queryable'));  
+  return XMLParser.pushParseAndPop({queryable: isDef(queryable) ? queryable : false}, WMS.LAYER_PARSERS, node, objectStack);
 };
 
 
