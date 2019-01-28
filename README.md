@@ -12,7 +12,7 @@ Parses [WMS](http://en.wikipedia.org/wiki/Web_Map_Service) capabilities XML form
 npm install wms-capabilities --save
 ```
 ```js
-var WMSCapabilities = require('wms-capabilities');
+import WMSCapabilities from 'wms-capabilities';
 ...
 new WMSCapabilities().parse(xmlString);
 //or
@@ -33,10 +33,10 @@ $npm install --save xmldom
 ```
 then
 ```js
-var DOMParser = global.DOMParser = require('xmldom').DOMParser;
-var WMSCapabilities = require('wms-capabilities');
+import { DOMParser } from 'xmldom';
+import WMSCapabilities from 'wms-capabilities';
 ...
-new WMSCapabilities(xmlString).toJSON();
+new WMSCapabilities(xmlString, DOMParser).toJSON();
 ```
 
 ### Command-line

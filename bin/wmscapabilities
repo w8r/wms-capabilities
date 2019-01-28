@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var xmldom = require('xmldom');
-var DOMParser = global.DOMParser = xmldom.DOMParser;
 var WMSCapabilites = require('../dist/wms-capabilities.min.js');
 var fs = require('fs');
 var path = require('path');
@@ -33,7 +32,7 @@ stream.on('data', function (data) {
 stream.resume();
 
 stream.on('end', function () {
-  var json = new WMSCapabilites(xml).toJSON();
+  var json = new WMSCapabilites(xml, xmldom.DOMParser).toJSON();
   process.stdout.write(JSON.stringify(json, 0, 2) + '\n');
 });
 
