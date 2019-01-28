@@ -7,15 +7,13 @@
     "wmscapabilities": "bin/wmscapabilities"
   },
   "scripts": {
-    "test": "tape test/index.js | tap-spec",
-    "start": "npm run watch-js & npm run watch-css & serve -p 3001",
+    "test": "node -r reify test/index.js | tap-spec",
+    "start": "npm run watch-js & npm run watch-css",
     "watch-css": "catw -c 'lessc -' 'example/less/*.less' -o example/css/style.css -v",
-    "watch-js": "watchify -v -d example/js/app.js -u leaflet -o example/js/bundle.js",
+    "watch-js": "rollup -cw",
     "build-less": "lessc example/less/style.less > example/css/style.css",
     "build-css": "npm run build-less",
-    "build-js": "browserify -s WMSCapabilities index.js -o dist/wms-capabilities.js",
-    "compress": "npm run compress-js",
-    "compress-js": "browserify -s WMSCapabilities index.js | uglifyjs --comments -m -c drop_console=true,warnings=false > dist/wms-capabilities.min.js",
+    "build-js": "rollup -c",
     "build": "npm run build-js && npm run compress && npm run build-css"
   },
   "repository": {
@@ -23,19 +21,19 @@
     "url": "https://github.com/w8r/wms-capabilities.git"
   },
   "devDependencies": {
-    "catw": "^0.2.0",
-    "less": "^2.1.2",
-    "reqwest": "^1.1.5",
-    "serve": "^1.4.0",
-    "spin.js": "^2.0.2",
-    "tap-spec": "^4.0.0",
-    "tape": "^4.0.0",
-    "testling": "^1.7.1",
-    "watchify": "^2.2.1"
+    "@ampproject/rollup-plugin-closure-compiler": "^0.8.5",
+    "reify": "^0.18.1",
+    "rollup": "^1.1.2",
+    "rollup-plugin-browsersync": "^1.0.0",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.2",
+    "xmldom": "^0.1.27"
   },
   "dependencies": {
-    "minimist": "^1.2.0",
-    "xmldom": "^0.1.19"
+    "minimist": "^1.2.0"
   },
   "keywords": [
     "gis",
