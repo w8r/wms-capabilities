@@ -33,10 +33,10 @@ $npm install --save xmldom
 ```
 then
 ```js
-import { DOMParser } from 'xmldom';
+import xmldom from 'xmldom'; // 'xmldom' doesn't 'export' the DOMParser
 import WMSCapabilities from 'wms-capabilities';
 ...
-new WMSCapabilities(xmlString, DOMParser).toJSON();
+new WMSCapabilities(xmlString, xmldom.DOMParser).toJSON();
 ```
 
 ### Command-line
