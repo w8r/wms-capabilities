@@ -86,26 +86,26 @@ body {
   font-weight: 400;
   height: 3rem;
   letter-spacing: 1px;
-  color: #c6c8c8;
-  text-shadow: 0 -1px rgba(0, 0, 0, 0.69);
+  color: hsl(180, 2%, 78%);
+  text-shadow: 0 -1px hsla(0, 0%, 0%, 0.69);
   border-radius: 6px;
-  background-color: #585a5a;
-  box-shadow: inset 0 1px #737373;
-  border: 1px solid #323434;
+  background-color: hsl(180, 1%, 35%);
+  box-shadow: inset 0 1px hsl(0, 0%, 45%);
+  border: 1px solid hsl(180, 1%, 20%);
   background-image: url('../img/dropdown.svg');
   background-repeat: no-repeat;
   background-position: center right;
 }
 .topcoat-select:hover {
-  background-color: #616465;
+  background-color: hsl(200, 2%, 39%);
 }
 .topcoat-select:active {
-  background-color: #3e4041;
-  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05);
+  background-color: hsl(210, 2%, 25%);
+  box-shadow: inset 0 1px hsla(0, 0%, 0%, 0.05);
 }
 .topcoat-select:focus {
-  border: 1px solid #0037ff;
-  box-shadow: 0 0 0 2px #6fb4f1;
+  border: 1px solid hsl(227, 100%, 50%);
+  box-shadow: 0 0 0 2px hsl(208, 82%, 69%);
   outline: 0;
 }
 h2,
@@ -143,13 +143,13 @@ h3 {
 .container .code:focus {
   max-height: 350px;
   margin-right: 20px;
-  border-radius: .5em;
-  border: 0.3em solid #545454;
-  box-shadow: 1px 1px .5em black inset;
+  border-radius: 0.5em;
+  border: 0.3em solid hsl(0, 0%, 33%);
+  box-shadow: 1px 1px 0.5em black inset;
   margin: 0;
   overflow: auto;
   padding: 1em;
-  background: #141414;
+  background: hsl(0, 0%, 8%);
   color: white;
   direction: ltr;
   font-family: Consolas, Monaco, 'Andale Mono', monospace;
@@ -192,107 +192,4 @@ h3 {
   #controls .control.range {
     display: inline-block;
   }
-}
-.topcoat-select {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-}
-.topcoat-select {
-  vertical-align: top;
-  outline: none;
-}
-.topcoat-select {
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.topcoat-select {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background-clip: padding-box;
-}
-.topcoat-select {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-}
-.topcoat-select:disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-}
-.topcoat-select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-.topcoat-select::-ms-expand {
-  display: none;
-}
-/* topdoc
-  name: Topcoat Select
-  description: A component that lets you select things
-  modifiers:
-    :disabled: Disabled state
-    :focus: Focused
-    :invalid: Hover state
-  markup:
-    <select class="topcoat-select">
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
-    </select>
-    <select class="topcoat-select" disabled>
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
-    </select>
-  tags:
-    - desktop
-    - mobile
-    - text
-    - input
-*/
-.topcoat-select {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  appearance: button;
-  text-indent: 0.01px;
-  text-overflow: '';
-  padding: 0.7rem 1.3rem 0.7rem 1rem;
-  font-size: 16px;
-  font-weight: 400;
-  height: 3rem;
-  letter-spacing: 1px;
-  color: #c6c8c8;
-  text-shadow: 0 -1px rgba(0, 0, 0, 0.69);
-  border-radius: 6px;
-  background-color: #585a5a;
-  box-shadow: inset 0 1px #737373;
-  border: 1px solid #323434;
-  background-image: url('../img/dropdown.svg');
-  background-repeat: no-repeat;
-  background-position: center right;
-}
-.topcoat-select:hover {
-  background-color: #616465;
-}
-.topcoat-select:active {
-  background-color: #3e4041;
-  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05);
-}
-.topcoat-select:focus {
-  border: 1px solid #0037ff;
-  box-shadow: 0 0 0 2px #6fb4f1;
-  outline: 0;
 }

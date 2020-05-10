@@ -14,7 +14,7 @@
     "build-less": "lessc example/less/style.less > example/css/style.css",
     "build-css": "npm run build-less",
     "build-js": "rollup -c",
-    "build": "npm run build-js && npm run compress && npm run build-css"
+    "build": "npm run build-js && npm run build-css"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "^0.8.5",
+    "lessc": "^1.0.2",
     "reify": "^0.18.1",
     "rollup": "^1.1.2",
     "rollup-plugin-browsersync": "^1.0.0",
