@@ -1,3 +1,11 @@
+
+/**
+ * wms-capabilities @0.4.1
+ * @description WMS service Capabilities > JSON, based on openlayers 
+ * @license BSD-2-Clause
+ * @preserve
+ */
+
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :

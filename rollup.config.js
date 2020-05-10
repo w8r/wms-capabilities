@@ -3,6 +3,16 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import browsersync from 'rollup-plugin-browsersync';
+import { name, description, license, version } from './package.json';
+
+const banner = `
+/**
+ * ${name} @${version}
+ * @description ${description}
+ * @license ${license}
+ * @preserve
+ */
+`
 
 export default [{
   input: 'src/index.js',
@@ -10,7 +20,8 @@ export default [{
     file: 'dist/wms-capabilities.js',
     format: 'umd',
     name: 'WMSCapabilities',
-    sourcemap: true
+    sourcemap: true,
+    banner
   },
   plugins: [
     buble(),
@@ -37,7 +48,8 @@ export default [{
     file: 'dist/wms-capabilities.min.js',
     format: 'umd',
     name: 'WMSCapabilities',
-    sourcemap: true
+    sourcemap: true,
+    banner
   },
   plugins: [
     buble(),
