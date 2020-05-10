@@ -21,7 +21,7 @@
     "url": "https://github.com/w8r/wms-capabilities.git"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "^0.8.5",
+    "@ampproject/rollup-plugin-closure-compiler": "^0.25.2",
     "lessc": "^1.0.2",
     "reify": "^0.18.1",
     "rollup": "^1.1.2",
