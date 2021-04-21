@@ -27,6 +27,20 @@ export default [{
     buble(),
   ]
 }, {
+  input: 'src/index.js',
+  output: {
+    file: 'dist/wms-capabilities.min.js',
+    format: 'umd',
+    name: 'WMSCapabilities',
+    sourcemap: true,
+    banner
+  },
+  plugins: [
+    buble(),
+    compiler({
+    })
+  ]
+}, {
   input: 'example/js/app.js',
   output: {
     file: 'example/js/bundle.js',
@@ -41,19 +55,5 @@ export default [{
     nodeResolve(),
     commonjs(),
     buble(),
-  ]
-}, {
-  input: 'src/index.js',
-  output: {
-    file: 'dist/wms-capabilities.min.js',
-    format: 'umd',
-    name: 'WMSCapabilities',
-    sourcemap: true,
-    banner
-  },
-  plugins: [
-    buble(),
-    compiler({
-    })
   ]
 }];
