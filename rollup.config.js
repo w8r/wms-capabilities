@@ -1,6 +1,6 @@
-import buble from 'rollup-plugin-buble';
-import commonjs from 'rollup-plugin-commonjs';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import buble from '@rollup/plugin-buble';
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import browsersync from 'rollup-plugin-browsersync';
 import { name, description, license, version } from './package.json';

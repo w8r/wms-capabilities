@@ -9,8 +9,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.WMSCapabilities = factory());
-}(this, function () { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.WMSCapabilities = factory());
+}(this, (function () { 'use strict';
 
   /**
    * Returns true if the specified value is not undefined.
@@ -72,7 +72,7 @@
    * @api
    */
   XMLParser.prototype.getAllTextContent = function getAllTextContent$1 (node, normalizeWhitespace) {
-    return getAllTextContent(node, normalizeWhitespace, []).join('');
+    return getAllTextContent(node, normalizeWhitespace).join('');
   };
 
 
@@ -371,14 +371,14 @@
    * @const
    * @type {string}
    */
-  var NAMESPACE_URI$1 = 'http://www.w3.org/1999/xlink';
+  var NAMESPACE_URI = 'http://www.w3.org/1999/xlink';
 
   /**
    * @param {Node} node Node.
    * @return {Boolean|undefined} Boolean.
    */
   function readHref (node) {
-    return node.getAttributeNS(NAMESPACE_URI$1, 'href');
+    return node.getAttributeNS(NAMESPACE_URI, 'href');
   }
 
   /**
@@ -1136,5 +1136,5 @@
 
   return WMS;
 
-}));
+})));
 //# sourceMappingURL=wms-capabilities.js.map

@@ -116,11 +116,17 @@
     return formatted;
   }
 
-  var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+  var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-  function createCommonjsModule(fn, module) {
-  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  function createCommonjsModule(fn) {
+    var module = { exports: {} };
+  	return fn(module, module.exports), module.exports;
   }
+
+  /*
+   BSD-2-Clause
+   @preserve
+  */
 
   var wmsCapabilities_min = createCommonjsModule(function (module, exports) {
   (function(f,m){module.exports=m();})(commonjsGlobal,function(){function f(a){return void 0!==a}function m(a,c,b){if(a.nodeType===u.CDATA_SECTION||a.nodeType===u.TEXT){ c?b.push(String(a.nodeValue).replace(/(\r\n|\r|\n)/g,"")):b.push(a.nodeValue); }else { for(a=a.firstChild;a;a=a.nextSibling){ m(a,c,b); } }return b}function F(a){for(a=a.nextElementSibling||a.nextSibling;a&&
@@ -137,7 +143,7 @@
   LogoURL:b(C)}),S=h(g,{westBoundLongitude:b(t),eastBoundLongitude:b(t),southBoundLatitude:b(t),northBoundLatitude:b(t)}),N=h(g,{GetCapabilities:b(y),GetMap:b(y),GetFeatureInfo:b(y)}),I=h(g,{Format:k(e),DCPType:k(function(a,b){return l({},V,a,b)})}),V=h(g,{HTTP:b(function(a,b){return l({},W,a,b)})}),W=h(g,{Get:b(q),Post:b(q)}),U=h(g,{Name:b(e),Title:b(e),Abstract:b(e),LegendURL:k(C),StyleSheetURL:b(q),StyleURL:b(q)}),H=h(g,{Format:b(e),OnlineResource:b(x)}),J=h(g,{Keyword:A(e)});g=function(a,b){b||
   "undefined"===typeof window||(b=window.DOMParser);this.version=void 0;this._parser=new z(b);this._data=a;};g.prototype.data=function(a){this._data=a;return this};g.prototype.toJSON=function(a){a=a||this._data;return this.parse(a)};g.prototype.parse=function(a){return this._readFromDocument(this._parser.toDocument(a))};g.prototype._readFromDocument=function(a){for(a=a.firstChild;a;a=a.nextSibling){ if(a.nodeType==u.ELEMENT){ return this.readFromNode(a); } }return null};g.prototype.readFromNode=function(a){this.version=
   a.getAttribute("version");return l({version:this.version},M,a,[])||null};return g});
-
+  //# sourceMappingURL=wms-capabilities.min.js.map
   });
 
   //import Spinner from 'spin.js';
