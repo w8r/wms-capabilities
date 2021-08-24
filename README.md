@@ -7,7 +7,7 @@ Parses [WMS](http://en.wikipedia.org/wiki/Web_Map_Service) capabilities XML form
 
 ## Usage
 
-### Browserify
+### ES
 ```
 npm install wms-capabilities --save
 ```
@@ -17,6 +17,8 @@ import WMSCapabilities from 'wms-capabilities';
 new WMSCapabilities().parse(xmlString);
 //or
 new WMSCapabilities(xmlString).toJSON();
+// or 
+new WMSCapabilities().readFromDocument(xmldoc);
 ```
 ### Browser
 ```html
