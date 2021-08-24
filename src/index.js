@@ -42,7 +42,7 @@ export default class WMS {
 
   /**
    * @param  {String=} xmlString
-   * @return {Object}
+   * @return {Object|null}
    */
   toJSON (xmlString) {
     xmlString = xmlString || this._data;
@@ -51,16 +51,17 @@ export default class WMS {
 
   /**
    * @return {String} xml
+   * @return {Object|null}
    */
   parse (xmlString) {
-    return this._readFromDocument(this._parser.toDocument(xmlString));
+    return this.readFromDocument(this._parser.toDocument(xmlString));
   }
 
   /**
    * @param  {Document} doc
-   * @return {Object}
+   * @return {Object|null}
    */
-  _readFromDocument (doc) {
+  readFromDocument (doc) {
     for (let node = doc.firstChild; node; node = node.nextSibling) {
       if (node.nodeType == nodeTypes.ELEMENT) {
         return this.readFromNode(node);
