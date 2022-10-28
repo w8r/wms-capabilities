@@ -1,9 +1,9 @@
-import buble from '@rollup/plugin-buble';
-import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import compiler from '@ampproject/rollup-plugin-closure-compiler';
-import browsersync from 'rollup-plugin-browsersync';
-import { name, description, license, version } from './package.json';
+import buble from "@rollup/plugin-buble";
+import commonjs from "@rollup/plugin-commonjs";
+import nodeResolve from "@rollup/plugin-node-resolve";
+import compiler from "@ampproject/rollup-plugin-closure-compiler";
+import browsersync from "rollup-plugin-browsersync";
+import { name, description, license, version } from "./package.json";
 
 const banner = `
 /**
@@ -12,48 +12,57 @@ const banner = `
  * @license ${license}
  * @preserve
  */
-`
+`;
 
-export default [{
-  input: 'src/index.js',
-  output: {
-    file: 'dist/wms-capabilities.js',
-    format: 'umd',
-    name: 'WMSCapabilities',
-    sourcemap: true,
-    banner
+export default [
+  {
+    input: "src/index.js",
+    output: {
+      file: "dist/wms-capabilities.js",
+      format: "umd",
+      name: "WMSCapabilities",
+      sourcemap: true,
+      banner,
+    },
+    plugins: [buble()],
   },
-  plugins: [
-    buble(),
-  ]
-}, {
-  input: 'src/index.js',
-  output: {
-    file: 'dist/wms-capabilities.min.js',
-    format: 'umd',
-    name: 'WMSCapabilities',
-    sourcemap: true,
-    banner
+  {
+    input: "src/index.js",
+    output: {
+      file: "dist/wms-capabilities.mjs",
+      format: "esm",
+      name: "WMSCapabilities",
+      sourcemap: true,
+      banner,
+    },
   },
-  plugins: [
-    buble(),
-    compiler({
-    })
-  ]
-}, {
-  input: 'example/js/app.js',
-  output: {
-    file: 'example/js/bundle.js',
-    format: 'iife'
+  {
+    input: "src/index.js",
+    output: {
+      file: "dist/wms-capabilities.min.js",
+      format: "umd",
+      name: "WMSCapabilities",
+      sourcemap: true,
+      banner,
+    },
+    plugins: [buble(), compiler({})],
   },
-  plugins: [
-    (process.argv[2].indexOf('w') !== -1)
-      ? browsersync({
-        server: '.',
-        port: 3002
-      }) : null,
-    nodeResolve(),
-    commonjs(),
-    buble(),
-  ]
-}];
+  {
+    input: "example/js/app.js",
+    output: {
+      file: "example/js/bundle.js",
+      format: "iife",
+    },
+    plugins: [
+      process.argv[2].indexOf("w") !== -1
+        ? browsersync({
+            server: ".",
+            port: 3002,
+          })
+        : null,
+      nodeResolve(),
+      commonjs(),
+      buble(),
+    ],
+  },
+];

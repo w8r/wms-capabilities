@@ -141,9 +141,9 @@
   MaxScaleDenominator:b(t),ScaleHint:b(function(a,b){b=parseFloat(a.getAttribute("min"));a=parseFloat(a.getAttribute("max"));return {min:b,max:a}}),Layer:k(function(a,b){var c=b[b.length-1];b=l({},E,a,b);if(f(b)){var d=r(a.getAttribute("queryable"));f(d)||(d=c.queryable);b.queryable=f(d)?d:!1;d=v(a.getAttribute("cascaded"));f(d)||(d=c.cascaded);b.cascaded=d;d=r(a.getAttribute("opaque"));f(d)||(d=c.opaque);b.opaque=f(d)?d:!1;d=r(a.getAttribute("noSubsets"));f(d)||(d=c.noSubsets);b.noSubsets=f(d)?d:!1;
   d=p(a.getAttribute("fixedWidth"));f(d)||(d=c.fixedWidth);b.fixedWidth=d;a=p(a.getAttribute("fixedHeight"));f(a)||(a=c.fixedHeight);b.fixedHeight=a;a=["Style","CRS","AuthorityURL"];d=0;for(var e=a.length;d<e;d++){var g=a[d],h=c[g];if(f(h)){var k=[];k=g in b?b[g]:b[g]=k;k=k.concat(h);b[g]=k;}}a="EX_GeographicBoundingBox BoundingBox Dimension Attribution MinScaleDenominator MaxScaleDenominator".split(" ");d=0;for(e=a.length;d<e;d++){ g=a[d],f(b[g])||(b[g]=c[g]); }return b}})}),T=h(g,{Title:b(e),OnlineResource:b(x),
   LogoURL:b(C)}),S=h(g,{westBoundLongitude:b(t),eastBoundLongitude:b(t),southBoundLatitude:b(t),northBoundLatitude:b(t)}),N=h(g,{GetCapabilities:b(y),GetMap:b(y),GetFeatureInfo:b(y)}),I=h(g,{Format:k(e),DCPType:k(function(a,b){return l({},V,a,b)})}),V=h(g,{HTTP:b(function(a,b){return l({},W,a,b)})}),W=h(g,{Get:b(q),Post:b(q)}),U=h(g,{Name:b(e),Title:b(e),Abstract:b(e),LegendURL:k(C),StyleSheetURL:b(q),StyleURL:b(q)}),H=h(g,{Format:b(e),OnlineResource:b(x)}),J=h(g,{Keyword:A(e)});g=function(a,b){b||
-  "undefined"===typeof window||(b=window.DOMParser);this.version=void 0;this._parser=new z(b);this._data=a;};g.prototype.data=function(a){this._data=a;return this};g.prototype.toJSON=function(a){a=a||this._data;return this.parse(a)};g.prototype.parse=function(a){return this._readFromDocument(this._parser.toDocument(a))};g.prototype._readFromDocument=function(a){for(a=a.firstChild;a;a=a.nextSibling){ if(a.nodeType==u.ELEMENT){ return this.readFromNode(a); } }return null};g.prototype.readFromNode=function(a){this.version=
+  "undefined"===typeof window||(b=window.DOMParser);this.version=void 0;this._parser=new z(b);this._data=a;};g.prototype.data=function(a){this._data=a;return this};g.prototype.toJSON=function(a){a=a||this._data;return this.parse(a)};g.prototype.parse=function(a){return this.readFromDocument(this._parser.toDocument(a))};g.prototype.readFromDocument=function(a){for(a=a.firstChild;a;a=a.nextSibling){ if(a.nodeType==u.ELEMENT){ return this.readFromNode(a); } }return null};g.prototype.readFromNode=function(a){this.version=
   a.getAttribute("version");return l({version:this.version},M,a,[])||null};return g});
-  //# sourceMappingURL=wms-capabilities.min.js.map
+
   });
 
   //import Spinner from 'spin.js';
@@ -194,4 +194,4 @@
     }, 50);
   }, false);
 
-}());
+})();

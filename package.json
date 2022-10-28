@@ -1,8 +1,10 @@
 {
   "name": "wms-capabilities",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "WMS service Capabilities > JSON, based on openlayers ",
   "main": "dist/wms-capabilities.min.js",
+  "module": "dist/wms-capabilities.mjs",
+  "types": "index.d.ts",
   "bin": {
     "wmscapabilities": "bin/wmscapabilities"
   },
