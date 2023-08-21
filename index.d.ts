@@ -194,7 +194,7 @@ export default class WMS {
    * @param {String=} xmlString
    * @constructor
    */
-  constructor(xmlString?: string | undefined, DOMParser: any);
+  constructor(xmlString?: string | undefined, DOMParser?: any);
   /**
    * @type {String}
    */
